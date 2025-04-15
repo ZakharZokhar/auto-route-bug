@@ -1,5 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_route_test/router.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -9,19 +7,12 @@ void main() async {
 class TestApp extends StatelessWidget {
   TestApp({super.key});
 
-  final _appRouter = AppRouter();
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'TestApp',
-      debugShowCheckedModeBanner: false,
-      routerConfig: _appRouter.config(),
-    );
+    return MaterialApp(title: 'TestApp', debugShowCheckedModeBanner: false, home: FirstPage());
   }
 }
 
-@RoutePage()
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
 
@@ -34,7 +25,8 @@ class FirstPage extends StatelessWidget {
       ),
       body: Center(child: Text('First page')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.router.push(SecondRoute()),
+        onPressed:
+            () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => SecondPage())),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
@@ -42,7 +34,6 @@ class FirstPage extends StatelessWidget {
   }
 }
 
-@RoutePage()
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
 
